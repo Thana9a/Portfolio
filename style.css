@@ -1,0 +1,139 @@
+body {
+  padding-top: 80px; /* normal navbar height */
+  scroll-behavior: smooth;
+  /* Override Bootstrap's `bg-*` utilities (they use `!important`) */
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+/* Make Bootstrap components follow theme variables */
+.card {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  border-color: var(--card-border) !important;
+}
+
+.text-muted {
+  color: var(--muted) !important;
+}
+
+/* DEFAULT (on load): normal full-width navbar */
+.glass-nav {
+  position: fixed; /* works with fixed-top too */
+  top: 0;
+  left: 0;
+  transform: none;
+  width: 100%;
+  border-radius: 0;
+  padding: 10px 0;
+  overflow: visible;
+
+  background: #ffffff;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: none;
+
+  transition: all 220ms ease;
+}
+
+/* AFTER SCROLL: glass “pill” navbar */
+.glass-nav.is-glass {
+  top: 12px !important;
+  left: 50% !important;
+  right: auto !important; /* IMPORTANT: override fixed-top right:0 */
+  transform: translateX(-50%) !important;
+
+  width: min(1100px, calc(100% - 24px)) !important;
+  border-radius: 999px;
+  padding: 10px 14px;
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* keep your spacing tweak */
+.glass-nav > .container {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.nav-link {
+  color: #111 !important;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  opacity: 0.7;
+}
+
+/* dark mode (only when scrolled glass is active) */
+.dark .glass-nav.is-glass {
+  background: rgba(20, 20, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.dark .nav-link {
+  color: #f5f5f5 !important;
+}
+
+/* dark mode and light mode */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #111;
+  --muted: #6c757d;
+  --glass: rgba(255, 255, 255, 0.35);
+  --border: rgba(255, 255, 255, 0.4);
+  --card-border: rgba(0, 0, 0, 0.08);
+}
+
+.dark {
+  --bg: #0e0f13;
+  --surface: #15161b;
+  --text: #f5f5f5;
+  --muted: rgba(245, 245, 245, 0.7);
+  --glass: rgba(20, 20, 20, 0.6);
+  --border: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.12);
+}
+
+/* dark mode: keep the default (non-glass) navbar readable */
+.dark .glass-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.dark .navbar-brand {
+  color: var(--text) !important;
+}
+
+.dark .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* use theme variables for the glass state only */
+.glass-nav.is-glass {
+  background: var(--glass);
+  border: 1px solid var(--border);
+}
+
+/* Theme toggle button */
+.theme-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  color: inherit;
+}

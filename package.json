@@ -1,0 +1,9 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio website",
+  "main": "index.html",
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  }
+}

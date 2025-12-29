@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav navbar-light">
+      <div class="container">
+        <a class="navbar-brand fw-semibold" href="#">Thana</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+          aria-controls="navMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <button id="themeToggle" class="theme-btn" type="button">🌙</button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+          <ul class="navbar-nav gap-3">
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#skills">Skills</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-5">
+      <section class="mb-5" id="Profile">
+        <div class="card shadow-sm rounded-4 p-4">
+          <h2 class="fw-bold">
+            Hello, I'm Thana
+          </h2>
+          <p class="text-muted mb-3">
+            Computer Science Student focused on Web Development, database, and
+            building clean, useful software.
+          </p>
+          <button class="btn btn-dark rounded-3">View My Profile</button>
+        </div>
+      </section>
+
+      <section class="mb-5" id="about">
+        <div class="card mb-3" style="max-width: 800px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="./asset/thanaFarmer.png"
+                class="img-fluid rounded-start"
+                alt="ThanaFarmer"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">About</h5>
+                <p class="card-text">
+                  I am a problem solver at heart, dedicated to high-end web
+                  development and futuristic design. My mission is to bridge the
+                  gap between today’s ideas and tomorrow’s digital realities. If
+                  you aren't ready to push boundaries, you aren't ready to work
+                  with me.
+                </p>
+                <p class="card-text">
+                  <small class="text-muted">Last updated 3 mins ago</small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mb-5" id="skills">
+        <h5 class="text-uppercase text-muted mb-3">Skills</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="card shadow-sm rounded-4 p-3">
+              HTML, CSS, JavaScript
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card shadow-sm rounded-4 p-3">Bootstrap, Git</div>
+          </div>
+          <div class="col-md-4">
+            <div class="card shadow-sm rounded-4 p-3">SQL, C\C++, Java, C#</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-5" id="projects">
+        <h5 class="text-uppercase text-muted mb-3">Projects</h5>
+
+        <div class="card shadow-sm rounded-4 p-4 mb-3">
+          <h6 class="fw-semibold">Student Score Management System</h6>
+          <p class="text-muted mb-2">
+            Java Swing application with MySQL for managing student scores.
+          </p>
+          <span class="badge bg-secondary rounded-3 p-3 mb-2">Java</span>
+          <span class="badge bg-secondary rounded-3 p-3 mb-2">MySQL</span>
+        </div>
+
+        <div class="card shadow-sm rounded-4 p-4">
+          <h6 class="fw-semibold">Face Recognition Attendance</h6>
+          <p class="text-muted mb-2">
+            Attendance system using face recognition and API integration.
+          </p>
+          <span class="badge bg-secondary rounded-3 p-3 mb-2">Python</span>
+          <span class="badge bg-secondary rounded-3 p-3 mb-2">API</span>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h5 class="text-uppercase text-muted mb-3">Contact</h5>
+        <div class="card shadow-sm rounded-4 p-4">
+          <p>Email: thanabro70@gmail.com</p>
+          <p>GitHub: github.com/Thana9a</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>

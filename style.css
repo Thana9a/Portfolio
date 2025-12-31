@@ -1,6 +1,35 @@
+/* =========================
+   Theme variables
+   ========================= */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #111;
+  --muted: #6c757d;
+
+  --glass: rgba(255, 255, 255, 0.55);
+  --border: rgba(0, 0, 0, 0.12);
+  --card-border: rgba(0, 0, 0, 0.08);
+}
+
+.dark {
+  --bg: #0e0f13;
+  --surface: #15161b;
+  --text: #f5f5f5;
+  --muted: rgba(245, 245, 245, 0.7);
+
+  --glass: rgba(20, 20, 20, 0.55);
+  --border: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.12);
+}
+
+/* =========================
+   Base page styles
+   ========================= */
 body {
   padding-top: 80px; /* normal navbar height */
   scroll-behavior: smooth;
+
   /* Override Bootstrap's `bg-*` utilities (they use `!important`) */
   background-color: var(--bg) !important;
   color: var(--text) !important;
@@ -11,11 +40,16 @@ body {
   background-color: var(--surface) !important;
   color: var(--text) !important;
   border-color: var(--card-border) !important;
+  overflow: hidden;
 }
 
 .text-muted {
   color: var(--muted) !important;
 }
+
+/* =========================
+   Navbar (default + glass-on-scroll)
+   ========================= */
 
 /* DEFAULT (on load): normal full-width navbar */
 .glass-nav {
@@ -28,12 +62,12 @@ body {
   padding: 10px 0;
   overflow: visible;
 
-  background: #ffffff;
+  background: var(--surface);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 
   border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--card-border);
   box-shadow: none;
 
   transition: all 220ms ease;
@@ -43,7 +77,7 @@ body {
 .glass-nav.is-glass {
   top: 12px !important;
   left: 50% !important;
-  right: auto !important; /* IMPORTANT: override fixed-top right:0 */
+  right: auto !important; /* override fixed-top right: 0 */
   transform: translateX(-50%) !important;
 
   width: min(1100px, calc(100% - 24px)) !important;
@@ -51,13 +85,20 @@ body {
   padding: 10px 14px;
   overflow: hidden;
 
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--glass);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
 
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Glass state tuning for dark mode */
+.dark .glass-nav.is-glass {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 /* keep your spacing tweak */
@@ -66,52 +107,13 @@ body {
   padding-right: 10px;
 }
 
-.nav-link {
-  color: #111 !important;
+.glass-nav .nav-link {
+  color: var(--text) !important;
   font-weight: 500;
 }
 
-.nav-link:hover {
+.glass-nav .nav-link:hover {
   opacity: 0.7;
-}
-
-/* dark mode (only when scrolled glass is active) */
-.dark .glass-nav.is-glass {
-  background: rgba(20, 20, 20, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-
-.dark .nav-link {
-  color: #f5f5f5 !important;
-}
-
-/* dark mode and light mode */
-:root {
-  --bg: #f6f7f9;
-  --surface: #ffffff;
-  --text: #111;
-  --muted: #6c757d;
-  --glass: rgba(255, 255, 255, 0.35);
-  --border: rgba(255, 255, 255, 0.4);
-  --card-border: rgba(0, 0, 0, 0.08);
-}
-
-.dark {
-  --bg: #0e0f13;
-  --surface: #15161b;
-  --text: #f5f5f5;
-  --muted: rgba(245, 245, 245, 0.7);
-  --glass: rgba(20, 20, 20, 0.6);
-  --border: rgba(255, 255, 255, 0.1);
-  --card-border: rgba(255, 255, 255, 0.12);
-}
-
-/* dark mode: keep the default (non-glass) navbar readable */
-.dark .glass-nav {
-  background: var(--surface);
-  border-bottom: 1px solid var(--card-border);
 }
 
 .dark .navbar-brand {
@@ -122,18 +124,139 @@ body {
   filter: invert(1);
 }
 
-/* use theme variables for the glass state only */
-.glass-nav.is-glass {
-  background: var(--glass);
-  border: 1px solid var(--border);
-}
-
-/* Theme toggle button */
+/* =========================
+   Theme toggle button (optional)
+   ========================= */
 .theme-btn {
   background: none;
   border: none;
   font-size: 1.25rem;
   cursor: pointer;
-  margin-right: 1rem;
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  line-height: 1.2;
   color: inherit;
+}
+
+/* =========================
+   Card image hover effect
+   ========================= */
+.card .card-hover-img {
+  filter: grayscale(100%);
+  transition: filter 3s ease, transform 3s ease;
+  will-change: filter, transform;
+}
+
+.card:hover .card-hover-img {
+  filter: grayscale(0%);
+  transform: scale(1.01);
+}
+
+/* Touch devices: keep it color */
+@media (hover: none) {
+  .card .card-hover-img {
+    filter: grayscale(0%);
+  }
+}
+
+/* =========================
+   Skills (new layout)
+   ========================= */
+.skills-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  border-radius: 16px;
+}
+
+.section-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* The Grid System */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+/* Individual Card Styling */
+.skill-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border: 1px solid #eee;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-card .icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: #f1f3f5;
+}
+
+.skill-card .icon img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+}
+
+.skill-card h3 {
+  margin: 12px 0 0 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Hover Effects */
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific Color Accents on Hover */
+.skill-card.html:hover {
+  border-bottom: 4px solid #e34f26;
+}
+.skill-card.css:hover {
+  border-bottom: 4px solid #1572b6;
+}
+.skill-card.js:hover {
+  border-bottom: 4px solid #f7df1e;
+}
+.skill-card.bootstrap:hover {
+  border-bottom: 4px solid #7952b3;
+}
+.skill-card.git:hover {
+  border-bottom: 4px solid #f14e32;
+}
+.skill-card.mysql:hover {
+  border-bottom: 4px solid #00758f;
+}
+.skill-card.sql:hover {
+  border-bottom: 4px solid #333;
+}
+.skill-card.java:hover {
+  border-bottom: 4px solid #5382a1;
+}
+.skill-card.cpp:hover {
+  border-bottom: 4px solid #00599c;
 }

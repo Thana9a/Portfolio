@@ -1,47 +1,62 @@
-(() => {
-  const nav = document.querySelector(".glass-nav");
-  const startEl = document.querySelector("#about");
-  const endEl = document.querySelector("#contact");
-  if (!nav || !startEl || !endEl) return;
+document.addEventListener("DOMContentLoaded", () => {
+  // =========================
+  // Navbar: glass on scroll
+  // =========================
+  const nav = document.querySelector("nav.glass-nav");
+  const about = document.querySelector("#about");
+  if (nav) {
+    let triggerY = 80;
 
-  const NAV_OFFSET = 90; // adjust if needed (navbar height)
+    const computeTrigger = () => {
+      // when we reach "About" section, enable glass border
+      triggerY = about
+        ? Math.max(0, about.offsetTop - nav.offsetHeight - 16)
+        : 80;
+    };
 
-  let ticking = false;
+    const updateGlass = () => {
+      nav.classList.toggle("is-glass", window.scrollY >= triggerY);
+    };
 
-  const update = () => {
-    ticking = false;
+    computeTrigger();
+    updateGlass();
 
-    const y = window.scrollY || document.documentElement.scrollTop;
+    window.addEventListener("scroll", updateGlass, { passive: true });
+    window.addEventListener("resize", () => {
+      computeTrigger();
+      updateGlass();
+    });
+  }
 
-    const start = startEl.offsetTop - NAV_OFFSET;
-    const end = endEl.offsetTop + endEl.offsetHeight - NAV_OFFSET;
+  // =========================
+  // Theme toggle (dark mode)
+  // =========================
+  const themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) {
+    const syncIcon = () => {
+      themeToggle.textContent = document.body.classList.contains("dark")
+        ? "☀️"
+        : "🌙";
+    };
 
-    nav.classList.toggle("is-glass", y >= start && y <= end);
-  };
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      syncIcon();
+    });
 
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  };
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", update);
-  update(); // run once on load
-})();
-
-//dark mode white
-const toggle = document.getElementById("themeToggle");
-
-if (toggle) {
-  const syncIcon = () => {
-    toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
-  };
-
-  toggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark");
     syncIcon();
-  });
+  }
 
-  syncIcon();
-}
+  // =========================
+  // Mobile menu open/close state
+  // =========================
+  const menu = document.getElementById("navMenu");
+  if (nav && menu) {
+    menu.addEventListener("show.bs.collapse", () =>
+      nav.classList.add("menu-open")
+    );
+    menu.addEventListener("hidden.bs.collapse", () =>
+      nav.classList.remove("menu-open")
+    );
+  }
+});

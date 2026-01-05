@@ -260,3 +260,31 @@ body {
 .skill-card.cpp:hover {
   border-bottom: 4px solid #00599c;
 }
+
+/*
+
+/* Skill Level Badge */
+.level {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.level {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.advanced {
+  background: rgba(25,135,84,0.15);
+  color: #198754;
+  margin: 10px;
+}
+
+.intermediate {
+  background: rgba(13,110,253,0.15);
+  color: #0d6efd;
+  margin: 10px;
+}

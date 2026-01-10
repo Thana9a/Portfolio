@@ -1,25 +1,85 @@
+/* =========================
+   CSS VARIABLES
+   ========================= */
+:root {
+  /* Colors - Light Mode */
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #111;
+  --muted: #6c757d;
+  
+  /* Effects - Light Mode */
+  --glass: rgba(255, 255, 255, 0.55);
+  --border: rgba(0, 0, 0, 0.12);
+  --card-border: rgba(0, 0, 0, 0.08);
+  
+  /* Layout */
+  --nav-height: 80px;
+  
+  /* Contact Form - Light Mode */
+  --contact-bg: #fff;
+  --input-bg: #fff;
+  --input-border: #ccc;
+  --input-color: #000;
+  --input-placeholder: #888;
+}
+
+:root[data-theme="dark"] {
+  /* Colors - Dark Mode */
+  --bg: #0e0f13;
+  --surface: #15161b;
+  --text: #f5f5f5;
+  --muted: rgba(245, 245, 245, 0.7);
+  
+  /* Effects - Dark Mode */
+  --glass: rgba(20, 20, 20, 0.55);
+  --border: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.12);
+  
+  /* Contact Form - Dark Mode */
+  --contact-bg: rgba(255, 255, 255, 0.12);
+  --input-bg: #2a2a2a;
+  --input-border: #555;
+  --input-color: #fff;
+  --input-placeholder: #aaa;
+}
+
+
+/* =========================
+   BASE STYLES
+   ========================= */
 body {
-  padding-top: 80px; /* normal navbar height */
+  padding-top: var(--nav-height);
   scroll-behavior: smooth;
-  /* Override Bootstrap's `bg-*` utilities (they use `!important`) */
   background-color: var(--bg) !important;
   color: var(--text) !important;
 }
 
-/* Make Bootstrap components follow theme variables */
+/* Bootstrap Overrides */
 .card {
   background-color: var(--surface) !important;
   color: var(--text) !important;
   border-color: var(--card-border) !important;
+  overflow: hidden;
+}
+
+.card.rounded-5 {
+  border-radius: 1.5rem !important;
 }
 
 .text-muted {
   color: var(--muted) !important;
 }
 
-/* DEFAULT (on load): normal full-width navbar */
+
+/* =========================
+   Navbar Styles
+   ========================= */
+
+/* Default: Full-width navbar */
 .glass-nav {
-  position: fixed; /* works with fixed-top too */
+  --nav-height: 80px;
+  position: fixed;
   top: 0;
   left: 0;
   transform: none;
@@ -27,113 +87,667 @@ body {
   border-radius: 0;
   padding: 10px 0;
   overflow: visible;
-
-  background: #ffffff;
+  background: var(--surface);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
-
   border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--card-border);
   box-shadow: none;
-
-  transition: all 220ms ease;
+  --nav-accent: rgba(255, 255, 255, 0.45);
+  transition-property: top, left, transform, width, padding, border-radius,
+    background-color, box-shadow, border-color, backdrop-filter,
+    -webkit-backdrop-filter;
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: top, left, transform, width, padding, border-radius;
 }
 
-/* AFTER SCROLL: glass “pill” navbar */
+/* Glass mode: Pill navbar after scroll */
 .glass-nav.is-glass {
   top: 12px !important;
   left: 50% !important;
-  right: auto !important; /* IMPORTANT: override fixed-top right:0 */
+  right: auto !important;
   transform: translateX(-50%) !important;
-
   width: min(1100px, calc(100% - 24px)) !important;
   border-radius: 999px;
   padding: 10px 14px;
   overflow: hidden;
-
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--glass);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
-/* keep your spacing tweak */
-.glass-nav > .container {
-  padding-left: 10px;
-  padding-right: 10px;
+/* Glass indicator line */
+.glass-nav.is-glass::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--nav-accent),
+    transparent
+  );
+  opacity: 0.9;
+  pointer-events: none;
 }
 
-.nav-link {
-  color: #111 !important;
+/* Section-aware accent colors */
+body[data-section="about"] {
+  --nav-accent: rgba(13, 110, 253, 1);
+}
+body[data-section="skills"] {
+  --nav-accent: rgba(25, 135, 84, 1);
+}
+body[data-section="projects"] {
+  --nav-accent: rgba(121, 82, 179, 1);
+}
+body[data-section="contact"] {
+  --nav-accent: rgba(220, 53, 69, 1);
+}
+
+/* Navbar Links */
+.glass-nav .navbar-nav {
+  gap: 8px !important;
+}
+
+.glass-nav .navbar-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.2;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text) !important;
+  position: relative;
+}
+
+/* Light mode – default nav link text (refined gray) */
+:root:not([data-theme="dark"]) .glass-nav .nav-link {
+  color: rgba(0, 0, 0, 0.7) !important;
   font-weight: 500;
 }
 
-.nav-link:hover {
-  opacity: 0.7;
+/* Light mode – hover state (refined gray pill) */
+:root:not([data-theme="dark"]) .glass-nav .nav-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.9) !important;
+  transform: translateY(-1px);
 }
 
-/* dark mode (only when scrolled glass is active) */
-.dark .glass-nav.is-glass {
-  background: rgba(20, 20, 20, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+/* Dark mode – hover (keep accent color) */
+:root[data-theme="dark"] .navbar-nav .nav-link:hover {
+  color: var(--nav-accent) !important;
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.dark .nav-link {
-  color: #f5f5f5 !important;
+/* Active link highlight */
+.glass-nav .nav-link.section-active {
+  border-radius: 999px;
+  font-weight: 600;
+  padding: 8px 14px;
 }
 
-/* dark mode and light mode */
-:root {
-  --bg: #f6f7f9;
-  --surface: #ffffff;
-  --text: #111;
-  --muted: #6c757d;
-  --glass: rgba(255, 255, 255, 0.35);
-  --border: rgba(255, 255, 255, 0.4);
-  --card-border: rgba(0, 0, 0, 0.08);
+/* Light mode – active state (polished gray pill with subtle shadow) */
+:root:not([data-theme="dark"]) .glass-nav .nav-link.section-active {
+  background: rgba(0, 0, 0, 0.08);
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.95) !important;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.dark {
-  --bg: #0e0f13;
-  --surface: #15161b;
-  --text: #f5f5f5;
-  --muted: rgba(245, 245, 245, 0.7);
-  --glass: rgba(20, 20, 20, 0.6);
-  --border: rgba(255, 255, 255, 0.1);
-  --card-border: rgba(255, 255, 255, 0.12);
+/* Dark mode – glass pill (refined) */
+:root[data-theme="dark"] .glass-nav .nav-link.section-active {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--nav-accent) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* dark mode: keep the default (non-glass) navbar readable */
-.dark .glass-nav {
-  background: var(--surface);
-  border-bottom: 1px solid var(--card-border);
+/* Optional: Subtle accent glow (only in dark mode) */
+:root[data-theme="dark"]
+  body[data-section]
+  .glass-nav
+  .nav-link.section-active {
+  text-shadow: 0 0 6px color-mix(in srgb, var(--nav-accent) 30%, transparent);
 }
 
-.dark .navbar-brand {
+/* Navbar Brand */
+.navbar-brand {
   color: var(--text) !important;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  letter-spacing: -0.01em;
 }
 
-.dark .navbar-toggler-icon {
-  filter: invert(1);
+.navbar-brand:hover {
+  opacity: 0.8;
 }
 
-/* use theme variables for the glass state only */
-.glass-nav.is-glass {
-  background: var(--glass);
-  border: 1px solid var(--border);
+/* Theme Toggle Button - Refined */
+#themeToggle {
+  padding: 6px 12px;
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
 }
 
-/* Theme toggle button */
-.theme-btn {
-  background: none;
-  border: none;
-  font-size: 1.25rem;
+:root:not([data-theme="dark"]) #themeToggle {
+  border-color: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.7);
+}
+
+:root:not([data-theme="dark"]) #themeToggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.9);
+  transform: translateY(-1px);
+}
+
+:root[data-theme="dark"] #themeToggle {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+:root[data-theme="dark"] #themeToggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile Menu Adjustments */
+@media (max-width: 991.98px) {
+  .glass-nav.is-glass:has(.navbar-collapse.show),
+  .glass-nav.is-glass:has(.navbar-collapse.collapsing) {
+    border-radius: 18px;
+    overflow: visible;
+    transition-property: background-color, box-shadow, border-color,
+      backdrop-filter, -webkit-backdrop-filter;
+  }
+
+  .glass-nav.is-glass:has(.navbar-collapse.show) .navbar-collapse,
+  .glass-nav.is-glass:has(.navbar-collapse.collapsing) .navbar-collapse {
+    margin-top: 8px;
+  }
+
+  .glass-nav .navbar-nav .nav-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .glass-nav {
+    transition: none !important;
+  }
+}
+
+
+/* =========================
+   HERO SECTION
+   ========================= */
+
+/* Hero Animations */
+.hero-text,
+.hero-image {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.9s ease forwards;
+}
+
+.hero-image {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Photo */
+.hero-photo {
+  width: 100%;
+  border-radius: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  animation: float 6s ease-in-out infinite;
+}
+
+:root[data-theme="dark"] .hero-photo {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+
+/* =========================
+   ABOUT SECTION
+   ========================= */
+
+/* Card Image Hover Effect */
+.card .card-hover-img {
+  filter: grayscale(100%);
+  transition: filter 3s ease, transform 3s ease;
+  will-change: filter, transform;
+}
+
+.card:hover .card-hover-img {
+  filter: grayscale(0%);
+  transform: scale(1.01);
+}
+
+@media (hover: none) {
+  .card .card-hover-img {
+    filter: grayscale(0%);
+  }
+}
+
+
+/* =========================
+   SKILLS SECTION
+   ========================= */
+
+#skills {
+  padding-block: 3rem;
+}
+
+:root[data-theme="dark"] #skills {
+  background-color: var(--bg);
+}
+
+/* Skills Container */
+.skills-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Section Title */
+.section-title {
+  text-align: center;
+  color: var(--text);
+  margin-bottom: 40px;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.section-title .highlight {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+:root[data-theme="dark"] .section-title .highlight {
+  background: linear-gradient(90deg, #60a5fa, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Skills Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Center Last Grid (4 items) */
+.skills-grid:last-of-type {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.skills-grid:last-of-type .skill-card {
+  flex: 0 0 180px;
+  max-width: 200px;
+}
+
+/* Skill Card */
+.skill-card {
+  background: #fff;
+  height: 180px;
+  padding: 24px 20px;
+  border-radius: 16px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  margin-right: 1rem;
-  color: inherit;
+  
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  
+  /* Initial Hidden State */
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+  
+  /* Transitions */
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s ease;
+  will-change: transform, opacity;
+}
+
+:root[data-theme="dark"] .skill-card {
+  background: #1a1b21;
+  border-color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Skill Card - Revealed State */
+.skill-card.reveal-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: skillReveal 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes skillReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Skill Card - Icon */
+.skill-card .icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #f1f3f5;
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root[data-theme="dark"] .skill-card .icon {
+  background: #2f3037;
+}
+
+.skill-card .icon img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Skill Card - Title */
+.skill-card h3 {
+  margin: 12px 0 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+:root[data-theme="dark"] .skill-card h3 {
+  color: #e0e0e0;
+}
+
+/* Skill Card - Hover Effect */
+.skill-card:hover {
+  animation: skillFloatHover 2s ease-in-out infinite;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+:root[data-theme="dark"] .skill-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes skillFloatHover {
+  0%, 100% {
+    transform: translateY(-12px) scale(1.03);
+  }
+  50% {
+    transform: translateY(-18px) scale(1.03);
+  }
+}
+
+.skill-card:hover .icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.skill-card:hover .icon img {
+  transform: scale(1.05);
+}
+
+/* Skill-Specific Hover Colors */
+.skill-card.html:hover { border-bottom: 3px solid #e34f26; }
+.skill-card.css:hover { border-bottom: 3px solid #1572b6; }
+.skill-card.js:hover { border-bottom: 3px solid #f7df1e; }
+.skill-card.bootstrap:hover { border-bottom: 3px solid #7952b3; }
+.skill-card.git:hover { border-bottom: 3px solid #f14e32; }
+.skill-card.mysql:hover { border-bottom: 3px solid #00758f; }
+.skill-card.sql:hover { border-bottom: 3px solid #cc2927; }
+.skill-card.java:hover { border-bottom: 3px solid #5382a1; }
+.skill-card.cpp:hover { border-bottom: 3px solid #00599c; }
+
+/* Staggered Delays */
+.skill-card.delay-1 { transition-delay: 0.1s; }
+.skill-card.delay-2 { transition-delay: 0.2s; }
+.skill-card.delay-3 { transition-delay: 0.3s; }
+.skill-card.delay-4 { transition-delay: 0.4s; }
+.skill-card.delay-5 { transition-delay: 0.5s; }
+
+
+/* =========================
+   CONTACT SECTION
+   ========================= */
+
+/* Contact Logo Wrapper */
+.contact-logo-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  background: #f1f3f5;
+  transition: background-color 0.3s ease;
+}
+
+:root[data-theme="dark"] .contact-logo-wrapper {
+  background-color: #2f3037;
+}
+
+.contact-logo-wrapper img {
+  width: 30px;
+  transition: filter 0.3s ease, transform 0.2s ease;
+}
+
+.contact-logo-wrapper img:hover {
+  transform: scale(1.1);
+}
+
+:root[data-theme="dark"] .contact-logo-wrapper img {
+  filter: brightness(0) invert(1);
+}
+
+/* Contact Icon Wrapper */
+.contact-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #f1f3f5;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.contact-icon-wrapper:hover {
+  transform: scale(1.05);
+}
+
+:root[data-theme="dark"] .contact-icon-wrapper {
+  background: #2f3037;
+}
+
+.contact-icon {
+  width: 28px;
+  height: 28px;
+  color: #333;
+}
+
+:root[data-theme="dark"] .contact-icon {
+  color: #e0e0e0;
+}
+
+/* Contact Form Container */
+.contact-form-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 3rem 2rem;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: var(--surface);
+  transition: all 0.3s ease;
+}
+
+.contact-form-container.rounded-5 {
+  border-radius: 1.5rem !important;
+}
+
+/* Contact Form Elements */
+.contact-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.contact-form .form-control {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  border: 1px solid var(--input-border);
+  font-size: 1rem;
+  background-color: var(--surface);
+  color: var(--input-color);
+  transition: all 0.3s ease;
+}
+
+.contact-form .form-control::placeholder {
+  color: var(--input-placeholder);
+}
+
+.contact-form .form-control:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+  outline: none;
+}
+
+.contact-form textarea.form-control {
+  resize: none;
+  min-height: 150px;
+}
+
+/* Contact Form Button */
+.contact-form .btn-contact {
+  background: linear-gradient(45deg, #8d8d8d, #787878);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-form .btn-contact:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .contact-form-container {
+    padding: 2rem 1rem;
+  }
+
+  .contact-form .form-control {
+    padding: 0.75rem 1rem;
+  }
+}
+
+
+/* =========================
+   SCROLL REVEAL ANIMATION
+   ========================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.delay-1 { transition-delay: 0.1s; }
+.reveal.delay-2 { transition-delay: 0.2s; }
+.reveal.delay-3 { transition-delay: 0.3s; }
+
+
+/* =========================
+   ACCESSIBILITY
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  /* Reset transforms and opacity */
+  .hero-text,
+  .hero-image,
+  .hero-photo,
+  .reveal,
+  .skill-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Stop navbar transitions */
+  .glass-nav {
+    transition: none !important;
+  }
 }

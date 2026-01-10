@@ -11,25 +11,38 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg fixed-top glass-nav navbar-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
       <div class="container">
         <a class="navbar-brand fw-semibold" href="#">Thana</a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navMenu"
-          aria-controls="navMenu"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+        <!-- Right-side buttons (theme + hamburger) -->
+        <div class="d-flex align-items-center gap-2 ms-auto order-lg-2">
+          <button
+            id="themeToggle"
+            class="btn btn-sm btn-outline-secondary rounded-pill"
+            type="button"
+          >
+            🌙
+          </button>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navMenu"
+            aria-controls="navMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div
+          class="collapse navbar-collapse justify-content-end order-lg-1"
+          id="navMenu"
         >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <button id="themeToggle" class="theme-btn" type="button">🌙</button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
           <ul class="navbar-nav gap-3">
             <li class="nav-item">
               <a class="nav-link" href="#about">About</a>
@@ -49,68 +62,226 @@
     </nav>
 
     <main class="container py-5">
-      <section class="mb-5" id="Profile">
-        <div class="card shadow-sm rounded-4 p-4">
-          <h2 class="fw-bold">
-            Hello, I'm Thana
-          </h2>
-          <p class="text-muted mb-3">
-            Computer Science Student focused on Web Development, database, and
-            building clean, useful software.
-          </p>
-          <button class="btn btn-dark rounded-3">View My Profile</button>
+      <!-- HERO SECTION -->
+      <section id="hero" class="min-vh-100 d-flex align-items-center mb-5">
+        <div class="container">
+          <div class="row align-items-center gy-5">
+            <!-- Left: Text -->
+            <div class="col-lg-6 text-center text-lg-start hero-text">
+              <h1 class="fw-bold display-5 mb-3">Hi, I’m Thana</h1>
+
+              <h2 class="fs-4 fw-semibold text-muted mb-3">
+                Computer Science Student & Web Developer
+              </h2>
+
+              <p class="fs-5 text-muted mb-4">
+                I build clean, modern websites and software<br />
+                with a focus on usability and performance.
+              </p>
+
+              <div
+                class="d-flex gap-3 justify-content-center justify-content-lg-start"
+              >
+                <a href="#projects" class="btn btn-dark rounded-pill px-4">
+                  View Projects
+                </a>
+                <a
+                  href="#contact"
+                  class="btn btn-outline-secondary rounded-pill px-4"
+                >
+                  Contact Me
+                </a>
+              </div>
+            </div>
+
+            <!-- Right: Photo -->
+            <div class="col-lg-6 text-center hero-image">
+              <div class="hero-photo-wrapper mx-auto">
+                <img
+                  src="./asset/hero-photo.jpg"
+                  alt="Thana portrait"
+                  class="img-fluid hero-photo"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="mb-5" id="about">
-        <div class="card mb-3" style="max-width: 800px;">
+      <!-- About -->
+      <section class="mb-5 reveal" id="about">
+        <div class="card mb-3 rounded-5 shadow-sm">
           <div class="row g-0">
             <div class="col-md-4">
               <img
                 src="./asset/thanaFarmer.png"
-                class="img-fluid rounded-start"
+                class="img-fluid rounded-start card-hover-img"
                 alt="ThanaFarmer"
               />
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">About</h5>
-                <p class="card-text">
-                  I am a problem solver at heart, dedicated to high-end web
-                  development and futuristic design. My mission is to bridge the
-                  gap between today’s ideas and tomorrow’s digital realities. If
-                  you aren't ready to push boundaries, you aren't ready to work
-                  with me.
+                <h5 class="card-title fw-semibold fs-2 mb-3">About</h5>
+                <p class="card-text fs-4 text-muted">
+                  I’m a Computer Science student with a strong interest in web
+                  development and software engineering. I enjoy turning ideas
+                  into simple, clean, and functional digital experiences. I
+                  focus on writing readable code, understanding how systems work
+                  behind the scenes, and continuously improving my skills
+                  through practice and real projects. I’m currently building
+                  projects using web technologies and databases, while exploring
+                  different areas of software development to find where I can
+                  grow the most. I value learning, consistency, and
+                  problem-solving, and I’m always open to new challenges that
+                  help me become a better developer.
                 </p>
                 <p class="card-text">
-                  <small class="text-muted">Last updated 3 mins ago</small>
+                  <small class="text-muted"></small>
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section class="mb-5" id="skills">
-        <h5 class="text-uppercase text-muted mb-3">Skills</h5>
-        <div class="row g-3">
-          <div class="col-md-4">
-            <div class="card shadow-sm rounded-4 p-3">
-              HTML, CSS, JavaScript
+
+      <!-- Skills -->
+      <section class="mb-5 reveal" id="skills">
+        <div
+          class="col-lg-12 card shadow-sm rounded-5 border-1 p-4 p-md-5"
+        >
+          <!-- Web & Tools -->
+          <h2 class="section-title mb-4">
+            <span class="highlight">Web</span> & Tools
+          </h2>
+
+          <div class="skills-grid mb-5">
+            <div class="skill-card html delay-1">
+              <div class="icon" aria-hidden="true">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                  alt="HTML"
+                  loading="lazy"
+                />
+              </div>
+              <h3>HTML</h3>
+              <span class="level intermediate">Intermediate</span>
+            </div>
+
+            <div class="skill-card css delay-1">
+              <div class="icon" aria-hidden="true">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                  alt="CSS"
+                  loading="lazy"
+                />
+              </div>
+              <h3>CSS</h3>
+              <span class="level intermediate">Intermediate</span>
+            </div>
+
+            <div class="skill-card js delay-2">
+              <div class="icon" aria-hidden="true">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                  alt="JavaScript"
+                  loading="lazy"
+                />
+              </div>
+              <h3>JavaScript</h3>
+              <span class="level intermediate">Intermediate</span>
+            </div>
+
+            <div class="skill-card bootstrap delay-2">
+              <div class="icon" aria-hidden="true">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+                  alt="Bootstrap"
+                  loading="lazy"
+                />
+              </div>
+              <h3>Bootstrap</h3>
+              <span class="level intermediate">Intermediate</span>
+            </div>
+
+            <div class="skill-card git delay-3">
+              <div class="icon" aria-hidden="true">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                  alt="Git"
+                  loading="lazy"
+                />
+              </div>
+              <h3>Git</h3>
+              <span class="level intermediate">Intermediate</span>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="card shadow-sm rounded-4 p-3">Bootstrap, Git</div>
-          </div>
-          <div class="col-md-4">
-            <div class="card shadow-sm rounded-4 p-3">SQL, C\C++, Java, C#</div>
+
+          <!-- Programming & Database -->
+          <h2 class="section-title mb-4">
+            <span class="highlight">Programming</span> & Database
+          </h2>
+
+          <div class="skills-grid">
+            <div class="skill-card java delay-1">
+              <div class="icon" aria-hidden="true">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                  alt="Java"
+                  loading="lazy"
+                />
+              </div>
+              <h3>Java</h3>
+              <span class="level intermediate">Intermediate</span>
+            </div>
+
+            <div class="skill-card cpp delay-1">
+              <div class="icon" aria-hidden="true">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                  alt="C++"
+                  loading="lazy"
+                />
+              </div>
+              <h3>C++</h3>
+              <span class="level intermediate">Intermediate</span>
+            </div>
+
+            <div class="skill-card sql delay-2">
+              <div class="icon" aria-hidden="true">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg"
+                  alt="SQL"
+                  loading="lazy"
+                />
+              </div>
+              <h3>SQL</h3>
+              <span class="level intermediate">Intermediate</span>
+            </div>
+
+            <div class="skill-card mysql delay-2">
+              <div class="icon" aria-hidden="true">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                  alt="MySQL"
+                  loading="lazy"
+                />
+              </div>
+              <h3>MySQL</h3>
+              <span class="level intermediate">Intermediate</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="mb-5" id="projects">
+      <!-- Projects -->
+      <section class="mb-5 reveal" id="projects">
+        <p class="card-text">
+          <small class="text-muted"></small>
+        </p>
+
         <h5 class="text-uppercase text-muted mb-3">Projects</h5>
 
-        <div class="card shadow-sm rounded-4 p-4 mb-3">
+        <div class="card shadow-sm rounded-5 p-4 mb-3 reveal delay-1">
           <h6 class="fw-semibold">Student Score Management System</h6>
           <p class="text-muted mb-2">
             Java Swing application with MySQL for managing student scores.
@@ -119,7 +290,7 @@
           <span class="badge bg-secondary rounded-3 p-3 mb-2">MySQL</span>
         </div>
 
-        <div class="card shadow-sm rounded-4 p-4">
+        <div class="card shadow-sm rounded-5 p-4 reveal delay-2">
           <h6 class="fw-semibold">Face Recognition Attendance</h6>
           <p class="text-muted mb-2">
             Attendance system using face recognition and API integration.
@@ -129,16 +300,125 @@
         </div>
       </section>
 
-      <section id="contact">
+      <!-- Contact -->
+      <section id="contact" class="mt-5 reveal">
         <h5 class="text-uppercase text-muted mb-3">Contact</h5>
-        <div class="card shadow-sm rounded-4 p-4">
-          <p>Email: thanabro70@gmail.com</p>
-          <p>GitHub: github.com/Thana9a</p>
+
+        <!-- Contact Info Card -->
+        <div class="card shadow-sm rounded-5 p-4 border-0 mb-5">
+          <!-- Email -->
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div class="d-flex align-items-center gap-3">
+              <span class="contact-logo-wrapper">
+                <img
+                  class="logoEmail"
+                  src="https://www.freepnglogos.com/uploads/email-logo-png-27.png"
+                  alt="Email"
+                  loading="lazy"
+                  style="width: 30px"
+                />
+              </span>
+              <div>
+                <small class="text-muted">Email</small><br />
+                <span id="emailText">thanapro70@gmail.com</span>
+              </div>
+            </div>
+            <button
+              id="copyEmailBtn"
+              class="btn btn-outline-secondary rounded-pill btn-sm"
+            >
+              Copy
+            </button>
+          </div>
+          <hr />
+          <!-- GitHub -->
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-3">
+              <span class="contact-logo-wrapper">
+                <img
+                  class="logoGithub"
+                  src="https://www.pngall.com/wp-content/uploads/13/Github-Logo.png"
+                  alt="Github-Logo"
+                  loading="lazy"
+                  style="width: 30px"
+                />
+              </span>
+              <div>
+                <small class="text-muted">GitHub</small><br />
+                <a
+                  href="https://github.com/Thana9a"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-decoration-none fw-medium"
+                >
+                  github.com/Thana9a
+                </a>
+              </div>
+            </div>
+            <a
+              href="https://github.com/Thana9a"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outline-secondary rounded-pill btn-sm"
+            >
+              Visit
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-container rounded-5 mb-5">
+          <h2 class="section-title text-center mb-4">Contact Me</h2>
+          <form class="contact-form" action="#" method="POST">
+            <div class="form-group">
+              <input
+                type="text"
+                name="name"
+                class="form-control"
+                placeholder="Your Name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                placeholder="Your Email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                name="subject"
+                class="form-control"
+                placeholder="Subject"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                name="message"
+                class="form-control"
+                placeholder="Message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-contact">
+                Send Message
+              </button>
+            </div>
+          </form>
         </div>
       </section>
     </main>
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./main.js"></script>
+    <!-- add near the end of <body> -->
+    <script src="./nav-sections.js" defer></script>
   </body>
 </html>

@@ -592,50 +592,52 @@ body[data-section="contact"] {
   filter: brightness(0) invert(1);
 }
 
-/* Contact Icon Wrapper */
-.contact-icon-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #f1f3f5;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.contact-icon-wrapper:hover {
-  transform: scale(1.05);
-}
-
-:root[data-theme="dark"] .contact-icon-wrapper {
-  background: #2f3037;
-}
-
-.contact-icon {
-  width: 28px;
-  height: 28px;
-  color: #333;
-}
-
-:root[data-theme="dark"] .contact-icon {
-  color: #e0e0e0;
-}
-
-/* Contact Form Container */
-.contact-form-container {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 3rem 2rem;
-  border-radius: 0;
+/* =========================
+   CONTACT ACTION BUTTON
+   ========================= */
+#copyEmailBtn,
+.contact-action-btn,
+a.btn.btn-outline-secondary {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  color: #444;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 999px;
   box-shadow: none;
-  background-color: var(--surface);
-  transition: all 0.3s ease;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.contact-form-container.rounded-5 {
-  border-radius: 1.5rem !important;
+/* Hover */
+#copyEmailBtn:hover,
+.contact-action-btn:hover,
+a.btn.btn-outline-secondary:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.3);
+  color: #222;
+}
+
+/* =========================
+   DARK MODE
+   ========================= */
+:root[data-theme="dark"] #copyEmailBtn,
+:root[data-theme="dark"] .contact-action-btn,
+:root[data-theme="dark"] a.btn.btn-outline-secondary {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #e6e6e6;
+}
+
+:root[data-theme="dark"] #copyEmailBtn:hover,
+:root[data-theme="dark"] .contact-action-btn:hover,
+:root[data-theme="dark"] a.btn.btn-outline-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
 }
 
 /* Contact Form Elements */

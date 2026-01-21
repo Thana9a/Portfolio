@@ -92,8 +92,17 @@ body {
   border-bottom: 1px solid var(--card-border);
   box-shadow: none;
   --nav-accent: rgba(255, 255, 255, 0.45);
-  transition-property: top, left, transform, width, padding, border-radius,
-    background-color, box-shadow, border-color, backdrop-filter,
+  transition-property:
+    top,
+    left,
+    transform,
+    width,
+    padding,
+    border-radius,
+    background-color,
+    box-shadow,
+    border-color,
+    backdrop-filter,
     -webkit-backdrop-filter;
   transition-duration: 220ms;
   transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -114,7 +123,8 @@ body {
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12),
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
@@ -202,7 +212,8 @@ body[data-section="contact"] {
   border: 1.5px solid rgba(0, 0, 0, 0.2);
   color: rgba(0, 0, 0, 0.95) !important;
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08),
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -211,7 +222,8 @@ body[data-section="contact"] {
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
   color: var(--nav-accent) !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2),
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -228,7 +240,9 @@ body[data-section="contact"] {
   color: var(--text) !important;
   font-weight: 600;
   font-size: 1.1rem;
-  transition: color 0.2s ease, opacity 0.2s ease;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
   letter-spacing: -0.01em;
 }
 
@@ -273,8 +287,12 @@ body[data-section="contact"] {
   .glass-nav.is-glass:has(.navbar-collapse.collapsing) {
     border-radius: 18px;
     overflow: visible;
-    transition-property: background-color, box-shadow, border-color,
-      backdrop-filter, -webkit-backdrop-filter;
+    transition-property:
+      background-color,
+      box-shadow,
+      border-color,
+      backdrop-filter,
+      -webkit-backdrop-filter;
   }
 
   .glass-nav.is-glass:has(.navbar-collapse.show) .navbar-collapse,
@@ -347,7 +365,9 @@ body[data-section="contact"] {
 /* Card Image Hover Effect */
 .card .card-hover-img {
   filter: grayscale(100%);
-  transition: filter 3s ease, transform 3s ease;
+  transition:
+    filter 3s ease,
+    transform 3s ease;
   will-change: filter, transform;
 }
 
@@ -538,6 +558,35 @@ body[data-section="contact"] {
   border-bottom: 3px solid #00599c;
 }
 
+/* Dark mode skill colors (higher specificity) */
+:root[data-theme="dark"] .skill-card.html:hover {
+  border-bottom: 3px solid #e34f26;
+}
+:root[data-theme="dark"] .skill-card.css:hover {
+  border-bottom: 3px solid #1572b6;
+}
+:root[data-theme="dark"] .skill-card.js:hover {
+  border-bottom: 3px solid #f7df1e;
+}
+:root[data-theme="dark"] .skill-card.bootstrap:hover {
+  border-bottom: 3px solid #7952b3;
+}
+:root[data-theme="dark"] .skill-card.git:hover {
+  border-bottom: 3px solid #f14e32;
+}
+:root[data-theme="dark"] .skill-card.mysql:hover {
+  border-bottom: 3px solid #00758f;
+}
+:root[data-theme="dark"] .skill-card.sql:hover {
+  border-bottom: 3px solid #cc2927;
+}
+:root[data-theme="dark"] .skill-card.java:hover {
+  border-bottom: 3px solid #5382a1;
+}
+:root[data-theme="dark"] .skill-card.cpp:hover {
+  border-bottom: 3px solid #00599c;
+}
+
 /* =========================
    STAGGER DELAYS
    ========================= */
@@ -581,15 +630,24 @@ body[data-section="contact"] {
 
 .contact-logo-wrapper img {
   width: 30px;
-  transition: filter 0.3s ease, transform 0.2s ease;
+  transition:
+    filter 0.3s ease,
+    transform 0.2s ease;
 }
 
 .contact-logo-wrapper img:hover {
   transform: scale(1.1);
 }
 
-:root[data-theme="dark"] .contact-logo-wrapper img {
+/* Dark mode - invert email and github logos only */
+:root[data-theme="dark"] .contact-logo-wrapper .logoEmail,
+:root[data-theme="dark"] .contact-logo-wrapper .logoGithub {
   filter: brightness(0) invert(1);
+}
+
+/* LinkedIn logo stays colored in both modes */
+.contact-logo-wrapper .logoLinkedin {
+  filter: none !important;
 }
 
 /* =========================
@@ -705,7 +763,9 @@ a.btn.btn-outline-secondary:hover {
 .reveal {
   opacity: 0;
   transform: translateY(32px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 .reveal.active {
